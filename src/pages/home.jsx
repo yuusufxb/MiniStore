@@ -52,7 +52,7 @@ export function Home(){
     {/* Main Content */}
     <div>
         <h1 className="mb-4 text-center">MiniStore</h1>
-        {loading && <p className="text-center">Loading content ...</p>}
+        
          <input 
          type="text" 
          placeholder="Search"
@@ -60,6 +60,7 @@ export function Home(){
          value={searching}
          onChange={(s)=>setsearching(s.target.value)}
          />   
+         {loading && <p className="text-center">Loading content ...</p>}
         <div className="row">
             {filtredproducts.map((pro, index) => (
                 <div key={index} className="col-md-4 mb-4">
