@@ -8,15 +8,15 @@ export function Contact() {
     email: "",
     message: "",
   });
-
+  const [submit,setsubmit]=useState([]);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Thanks ${formData.name}! Your message has been sent.`);
-    setFormData({ name: "", email: "", message: "" }); // reset form
+    setsubmit(prev=>[...prev,formData]);
   };
 
   return (
@@ -74,6 +74,13 @@ export function Contact() {
         >
             ← Back to Home
         </button>
+        {submit.map((s)=>(<div>
+                <h3>{s.name}</h3>
+                <h3>{s.email}</h3>
+                <h4>{s.message}</h4>
+            </div>
+            )   
+        )}
       </form>
     </div>
   );

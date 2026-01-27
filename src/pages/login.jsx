@@ -2,11 +2,17 @@ import { forwardRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function Login() {
+  // enter keydown  
+  const handleEnter = (event) => {
+  if (event.key === "Enter") {
+    formSubmit(event);  // call login function
+  }
+};
     // users that i can login to my website
     const users = {
         "users":[{
             "username":"youssef",
-            "password":"01234"
+            "password":"1234"
             },
             {
             "username":"name", //type your name if you want to
@@ -46,6 +52,7 @@ export function Login() {
               Username
             </label>
             <input
+              onKeyDown={handleEnter}
               type="text"
               id="username"
               className="form-control"
@@ -60,6 +67,7 @@ export function Login() {
               Password
             </label>
             <input
+              onKeyDown={handleEnter}
               type="password"
               id="password"
               className="form-control"
