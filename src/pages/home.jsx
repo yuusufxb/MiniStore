@@ -33,7 +33,7 @@ export function Home({cart,setcard}){
 
     <ul id="nav-links">
       <li><Link to="/profile">Profile</Link></li>
-      <li><Link to="/card">Card</Link></li>
+      <li><Link to="/card">Card {cart.length}</Link></li>
       <li><Link to="/contact">Contact</Link></li>
     </ul>
   </nav>
