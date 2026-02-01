@@ -4,9 +4,7 @@ import { Card } from "./card";
 import './style/home.css';
 export function Home({cart,setcard}){
     {/*add to card function*/}
-    const addtocart=(pro)=>{
-        setcard((prev)=>[...prev,pro]);
-    }
+
     {/* fetching and loading data */}
     const [loading,setloading]=useState(false);
     const [products,setproducts]=useState([]);
@@ -21,6 +19,33 @@ export function Home({cart,setcard}){
         }
         fetchproducts();
     },[])
+    const addtocart = (product) => {
+    setcard(prev => {
+      const cartArray = Array.isArray(prev) ? prev : [];
+
+      const found = cartArray.find(item => item.id === product.id);
+
+      if (found) {
+        return cartArray.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+
+      return [
+        ...cartArray,
+        {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product.images[0],
+          quantity: 1
+        }
+      ];
+    });
+  };
+
     {/* search bar */}
     const [searching,setsearching]=useState("");
     const filtredproducts = products.filter((pro)=>
