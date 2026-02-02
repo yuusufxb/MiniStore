@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card } from "./card";
 import './style/home.css'
+import { Outlet } from "react-router-dom";
 export function Home({cart,setcard}){
-    {/*add to card function*/}
+    const nav = useNavigate();
 
     {/* fetching and loading data */}
     const [loading,setloading]=useState(false);
@@ -19,6 +20,7 @@ export function Home({cart,setcard}){
         }
         fetchproducts();
     },[])
+    {/*add to card function*/}
     const addtocart = (product) => {
     setcard(prev => {
 
@@ -76,8 +78,8 @@ export function Home({cart,setcard}){
   {loading && <p id="loading">Loading content...</p>}
 
   <div id="products">
-    {filtredproducts.map((pro) => (
-      <div key={pro.id} id="product-card">
+    {filtredproducts.map((pro,index) => (
+      <div key={pro.id} id="product-card" onClick={()=> nav("/product/"+pro.id)}>
         <img src={pro.images[0]} alt={pro.title} id="product-img" />
         <h3 id="product-title">{pro.title}</h3>
         <p id="product-price">${pro.price}</p>
@@ -91,8 +93,9 @@ export function Home({cart,setcard}){
   {/* Footer */}
   <footer id="footer">
     <p>&copy; {new Date().getFullYear()} MiniStore. All rights reserved.</p>
-    <p>Your one-stop shop for the coolest products!</p>
+    <p>Your one-stop shop for the coolest products!</p> <Outlet />
   </footer>
+ 
 </div>
     );
 }
