@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import './style/product.css'
 export function Products(){
     const { id } = useParams(); // get product id from URL
     const [product, setProduct] = useState(null);
@@ -20,23 +20,29 @@ export function Products(){
   if (loading) return <p>Loading...</p>;
 
   return (
-      <div id="product-page">
+     <div id="product-page">
       <button id="back-btn" onClick={() => nav("/home")}>← Back to Home</button>
       <div id="product-card">
-        <img src={product.images[0]} alt={product.title} id="product-image" />
-        <div id="product-info">
-          <h1 id="product-title">{product.title}</h1>
-          <p id="product-brand"><strong>Brand:</strong> {product.brand}</p>
-          <p id="product-category"><strong>Category:</strong> {product.category}</p>
-          <p id="product-price">
-            Price: ${product.price} {" "}
-            {product.discountPercentage && <span id="discount">-{product.discountPercentage}%</span>}
+        <div id="image-section">
+          <img src={product.images[0]} alt={product.title} />
+        </div>
+
+        <div id="info-section">
+          <h1 id="title">{product.title}</h1>
+          <p id="brand"><strong>Brand:</strong> {product.brand}</p>
+          <p id="category"><strong>Category:</strong> {product.category}</p>
+          <p id="price">
+            ${product.price} <span id="discount">{product.discountPercentage ? `-${product.discountPercentage}%` : ""}</span>
           </p>
-          <p id="product-rating"><strong>Rating:</strong> {product.rating} ⭐</p>
-          <p id="product-stock"><strong>Stock:</strong> {product.stock} ({product.availabilityStatus})</p>
-          <p id="product-description">{product.description}</p>
-          <p id="product-warranty"><strong>Warranty:</strong> {product.warrantyInformation}</p>
-          <p id="product-return"><strong>Return:</strong> {product.returnPolicy}</p>
+          <p id="rating-stock">
+            ⭐ {product.rating} | <span>{product.stock} in stock</span>
+          </p>
+          <p id="description">{product.description}</p>
+          <div id="extra-info">
+            <p><strong>Warranty:</strong> {product.warrantyInformation}</p>
+            <p><strong>Return Policy:</strong> {product.returnPolicy}</p>
+            <p><strong>Availability:</strong> {product.availabilityStatus}</p>
+          </div>
         </div>
       </div>
     </div>

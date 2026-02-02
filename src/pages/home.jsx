@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Card } from "./card";
 import './style/home.css'
-import { Outlet } from "react-router-dom";
 export function Home({cart,setcard}){
     const nav = useNavigate();
 
@@ -65,7 +63,7 @@ export function Home({cart,setcard}){
   </nav>
 
   {/* Main content */}
-  <h1 id="title">MiniStore</h1>
+  <h1 id="pro-title">MiniStore</h1>
 
   <input
     type="text"
@@ -77,12 +75,12 @@ export function Home({cart,setcard}){
 
   {loading && <p id="loading">Loading content...</p>}
 
-  <div id="products">
+  <div id="pros">
     {filtredproducts.map((pro,index) => (
-      <div key={pro.id} id="product-card" onClick={()=> nav("/product/"+pro.id)}>
-        <img src={pro.images[0]} alt={pro.title} id="product-img" />
-        <h3 id="product-title">{pro.title}</h3>
-        <p id="product-price">${pro.price}</p>
+      <div key={pro.id} id="pro-card" onClick={()=> nav("/product/"+pro.id)}>
+        <img src={pro.images[0]} alt={pro.title} id="prod-img" />
+        <h3 id="prod-title">{pro.title}</h3>
+        <p id="prod-price">${pro.price}</p>
         <button id="add-btn" onClick={() => addtocart(pro)}>
           Add to cart
         </button>
@@ -93,7 +91,7 @@ export function Home({cart,setcard}){
   {/* Footer */}
   <footer id="footer">
     <p>&copy; {new Date().getFullYear()} MiniStore. All rights reserved.</p>
-    <p>Your one-stop shop for the coolest products!</p> <Outlet />
+    <p>Your one-stop shop for the coolest products!</p>
   </footer>
  
 </div>
